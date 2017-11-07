@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<Context>
+	<Resource
+		name="jdbc/wicketexample"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="org.sqlite.JDBC"
+		url="jdbc:sqlite::memory:"
+	/>
+</Context>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title wicket:id="app-title"></title>
+		<wicket:header-items />
+	</head>
+	<body>
+		<div class="container">
+			<wicket:container wicket:id="page-caption"></wicket:container>
+			<form wicket:id="loginForm" method="post">
+				<div wicket:id="feedbackPanel" role="alert">
+				</div>
+				<div class="form-group">
+					<label for="userId">ユーザーID</label>
+					<input wicket:id="userId" type="text" id="userId" placeholder="ユーザーIDを入力してください" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="password">パスワード</label>
+					<input wicket:id="password" type="password" id="password" placeholder="パスワードを入力してください" class="form-control" />
+				</div>
+				<div class="form-group">
+					<div class="form-text text-muted">
+						<div>ユーザーIDとロールは以下のとおりです（パスワードはユーザーIDと同じです）</div>
+						<wicket:container wicket:id="usersRoles"></wicket:container>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary form-control">ログイン</button>
+				</div>
+				<input wicket:id="focusId" type="hidden" id="focusId" />
+			</form>
+		</div>
+		<wicket:container wicket:id="app-script"></wicket:container>
+		<script>
+			$(function() {
+				var focusId = $("#focusId").val();
+				if (focusId === "") {
+					focusId = "userId";
+				}
+				$("#" + focusId).focus();
+			});
+		</script>
+	</body>
+</html>

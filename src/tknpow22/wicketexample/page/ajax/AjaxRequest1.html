@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title wicket:id="app-title"></title>
+		<wicket:header-items />
+		<style>
+			#searchWord {
+				padding-left: 1em;
+			}
+			#employeeList {
+				list-style-type: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<wicket:container wicket:id="page-caption"></wicket:container>
+			<form wicket:id="ajaxForm" method="post">
+				<input type="text" style="display: none;" value="" /><!-- Enter によるサブミット防止用 -->
+				<div class="form-group">
+					<label for="employeeName">検索（従業員名）</label>
+					<input wicket:id="employeeName" type="text" placeholder="従業員名を入力してください" class="form-control" />
+				</div>
+				<div class="form-group">
+					<button wicket:id="search" type="button" class="btn btn-primary form-control">検索</button>
+				</div>
+				<div class="form-group">
+					<label for="searchWord">検索ワード</label>
+					<div wicket:id="searchWord" id="searchWord"></div>
+				</div>
+				<div class="form-group">
+					<label for="employeeList">検索結果</label>
+					<ul wicket:id="employeeList" id="employeeList">
+						<li wicket:id="employeeInfo">
+							<span wicket:id="employeeId"></span>
+							<span wicket:id="employeeName"></span>
+							<span wicket:id="age"></span>
+						</li>
+					</ul>
+				</div>
+			</form>
+			<wicket:container wicket:id="app-page-link"></wicket:container>
+		</div>
+		<wicket:container wicket:id="app-script"></wicket:container>
+	</body>
+</html>

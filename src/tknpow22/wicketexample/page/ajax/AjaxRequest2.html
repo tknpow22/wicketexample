@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title wicket:id="app-title"></title>
+		<wicket:header-items />
+		<style>
+			#searchWord {
+				padding-left: 1em;
+			}
+			#employeeList {
+				list-style-type: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<wicket:container wicket:id="page-caption"></wicket:container>
+			<form id="ajaxForm" method="post">
+				<input type="text" style="display: none;" value="" /><!-- Enter によるサブミット防止用 -->
+				<div class="form-group">
+					<label for="employeeName">検索（従業員名）</label>
+					<input id="employeeName" type="text" placeholder="従業員名を入力してください" class="form-control" />
+				</div>
+				<div class="form-group">
+					<button type="button" id="search" class="btn btn-primary form-control">検索</button>
+				</div>
+				<div class="form-group">
+					<label for="searchWord">検索ワード</label>
+					<div id="searchWord"></div>
+				</div>
+				<div class="form-group">
+					<label for="employeeList">検索結果</label>
+					<ul id="employeeList">
+						<!-- TODO
+						<li wicket:id="employeeInfo">
+							<span wicket:id="employeeId"></span>
+							<span wicket:id="employeeName"></span>
+							<span wicket:id="age"></span>
+						</li>
+						 -->
+					</ul>
+				</div>
+				<wicket:container wicket:id="ajax-search"></wicket:container>
+			</form>
+			<wicket:container wicket:id="app-page-link"></wicket:container>
+		</div>
+		<wicket:container wicket:id="app-script"></wicket:container>
+		<script>
+			$(function() {
+
+				$("#employeeName").val("山田");
+
+				$("#search").on("click", function() {
+
+					var data = {
+						"employeeName": $("#employeeName").val()
+					};
+					var url = $("#ajax-search").val();
+
+					$.ajax({
+						url: url,
+						type: "POST",
+						cache: false,
+
+						contentType: "application/json; charset=utf-8",
+						dataType: 'json',
+						data: JSON.stringify(data)
+
+					}).done(function(data, textStatus, jqXHR) {
+
+						var $employeeList = $("#employeeList");
+
+						$("#searchWord").text(data.result.searchWord);
+						$employeeList.empty();
+
+						for (var i = 0; i < data.result.employeeInfo.length; ++i) {
+							var employeeInfo = data.result.employeeInfo[i];
+							var $li = $("<li>");
+
+							$li.append($("<span>").append(employeeInfo.employeeId));
+							$li.append($("<span>").append(employeeInfo.employeeName));
+							$li.append($("<span>").append(String(employeeInfo.age)));
+
+							$employeeList.append($li);
+						}
+
+					}).fail(function(jqXHR, textStatus, errorThrown) {
+						if (jqXHR.status === 200 && textStatus === "parsererror") {
+							// サーバ側のページのバージョン番号が変わり,
+							// ページが保持している callbackUrl が古くなり、リダイレクトされたとみなす。
+
+							//window.location.reload();
+							alert("検索に失敗しました。ページをリロードしてやり直してください。");
+						} else {
+							alert("検索に失敗しました。");
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

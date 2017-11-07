@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title wicket:id="app-title"></title>
+		<wicket:header-items />
+		<style>
+			.userinfo {
+				font-size: small;
+			}
+			#menu {
+				opacity: 1;
+			}
+			#menu ul {
+				list-style-type: none;
+			}
+			/* メニューを折りたためるようにしたい場合は、以下のコードを有効にしてください */
+			/*
+			#menu div {
+				cursor: pointer;
+			}
+			*/
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<wicket:container wicket:id="page-caption"></wicket:container>
+			<div class="text-right">
+				<span class="userinfo" wicket:id="userinfo"></span>
+			</div>
+			<div id="menu">
+				<ul>
+					<wicket:container wicket:id="menu"></wicket:container>
+				</ul>
+			</div>
+			<div>
+				<a wicket:id="logout">ログアウト</a>
+			</div>
+		</div>
+		<wicket:container wicket:id="app-script"></wicket:container>
+		<script>
+			$(function() {
+				// メニューを折りたためるようにしたい場合は、以下のコードを有効にしてください
+				/*
+				$("#menu li .menu-item").hide();
+				$("#menu").css("opacity", "1");
+
+				$("#menu div").on("click", function() {
+					var id = $(this).data("id");
+
+					var li = $("#" + id);
+					if (li.is(':visible')) {
+						li.hide();
+					} else {
+						li.show();
+					}
+				});
+				*/
+			});
+		</script>
+	</body>
+</html>

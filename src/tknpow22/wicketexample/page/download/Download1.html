@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title wicket:id="app-title"></title>
+		<wicket:header-items />
+	</head>
+	<body>
+		<div class="container">
+			<wicket:container wicket:id="page-caption"></wicket:container>
+			<form wicket:id="downloadForm" method="post">
+				<div wicket:id="feedbackPanel" role="alert">
+				</div>
+				<div class="form-group">
+					<label for="employee">従業員名</label>
+					<select wicket:id="employee" id="employee" class="form-control">
+					</select>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary form-control">ダウンロード</button>
+				</div>
+			</form>
+			<wicket:container wicket:id="app-page-link"></wicket:container>
+		</div>
+		<wicket:container wicket:id="app-script"></wicket:container>
+	</body>
+</html>

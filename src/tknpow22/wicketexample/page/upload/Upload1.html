@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title wicket:id="app-title"></title>
+		<wicket:header-items />
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css" />
+		<style>
+			#contents {
+				word-wrap: break-word;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<wicket:container wicket:id="page-caption"></wicket:container>
+			<form wicket:id="uploadForm" method="post">
+				<div wicket:id="feedbackPanel" role="alert">
+				</div>
+				<div class="form-group">
+					<label for="fileupload">ファイル選択</label>
+					<input type="file" wicket:id="fileupload" id="fileupload" class="file" data-show-upload="false" data-show-preview="false" data-msg-placeholder="ファイルを選択してください" />
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary form-control">アップロード</button>
+				</div>
+				<div class="form-group">
+					<label for="contents">アップロード内容</label>
+					<div wicket:id="contents" id="contents">
+					</div>
+				</div>
+			</form>
+			<wicket:container wicket:id="app-page-link"></wicket:container>
+		</div>
+		<wicket:container wicket:id="app-script"></wicket:container>
+		<script src="js/fileinput.min.js"></script>
+	</body>
+</html>
