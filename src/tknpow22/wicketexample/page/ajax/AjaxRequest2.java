@@ -54,8 +54,8 @@ public class AjaxRequest2 extends AppPageBase {
 					String employeeName = queryJson.getString("employeeName");
 
 					String resultJsonString = "";
-					try (EmployeeDao dto = new EmployeeDao()) {
-						List<Employee> employees = dto.findEmployeesByName(employeeName);
+					try (EmployeeDao dao = new EmployeeDao()) {
+						List<Employee> employees = dao.findEmployeesByName(employeeName);
 
 						class Result {
 

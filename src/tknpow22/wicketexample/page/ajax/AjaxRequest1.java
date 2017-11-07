@@ -85,8 +85,8 @@ public class AjaxRequest1 extends AppPageBase {
 
 						searchWord = employeeName;
 
-						try (EmployeeDao dto = new EmployeeDao()) {
-							List<Employee> employees = dto.findEmployeesByName(employeeName);
+						try (EmployeeDao dao = new EmployeeDao()) {
+							List<Employee> employees = dao.findEmployeesByName(employeeName);
 
 							employeeInfo.clear();
 							employeeInfo.addAll(employees);
