@@ -1,5 +1,6 @@
 package tknpow22.wicketexample.page.ajax;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,30 +77,36 @@ public class AjaxRequest2 extends AppPageBase {
 					try (EmployeeDao dao = new EmployeeDao()) {
 						List<Employee> employees = dao.findEmployeesByName(employeeName);
 
-						class Result {
+						//// with Jackson: class
+						////class Result {
+						////
+						////	private String searchWord;
+						////	private List<Employee> employeeInfo;
+						////
+						////	public Result(String searchWord, List<Employee> employeeInfo) {
+						////		this.searchWord = searchWord;
+						////		this.employeeInfo = employeeInfo;
+						////	}
+						////	////
+						////	// NOTE: JSON 文字列化時に必要です。削除しないでください
+						////	@SuppressWarnings("unused")
+						////	public String getSearchWord() {
+						////		return searchWord;
+						////	}
+						////	////
+						////	// NOTE: JSON 文字列化時に必要です。削除しないでください
+						////	@SuppressWarnings("unused")
+						////	public List<Employee> getEmployeeInfo() {
+						////		return employeeInfo;
+						////	}
+						////}
+						////
+						////resultJsonString = AppUtils.getJsonString("result", new Result(employeeName, employees));
 
-							private String searchWord;
-							private List<Employee> employeeInfo;
-
-							public Result(String searchWord, List<Employee> employeeInfo) {
-								this.searchWord = searchWord;
-								this.employeeInfo = employeeInfo;
-							}
-
-							// NOTE: JSON 文字列化時に必要です。削除しないでください
-							@SuppressWarnings("unused")
-							public String getSearchWord() {
-								return searchWord;
-							}
-
-							// NOTE: JSON 文字列化時に必要です。削除しないでください
-							@SuppressWarnings("unused")
-							public List<Employee> getEmployeeInfo() {
-								return employeeInfo;
-							}
-						}
-
-						resultJsonString = AppUtils.getJsonString("result", new Result(employeeName, employees));
+						Map<String, Object> result = new HashMap<>();
+						result.put("searchWord", employeeName);
+						result.put("employeeInfo", employees);
+						resultJsonString = AppUtils.getJsonString("result", result);
 					}
 
 					requestCycle.scheduleRequestHandlerAfterCurrent(
