@@ -1,12 +1,14 @@
 package tknpow22.wicketexample.page.ajax;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.handler.TextRequestHandler;
 
-import com.github.openjson.JSONObject;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tknpow22.wicketexample.app.AppRoles;
 import tknpow22.wicketexample.app.page.AppPageBase;
@@ -34,6 +36,12 @@ import tknpow22.wicketexample.dto.Employee;
 @AuthorizeInstantiation({AppRoles.All})
 public class AjaxRequest2 extends AppPageBase {
 
+	//// with Jackson: static class
+	////private static class RequestAjaxSearch {
+	////	public String employeeName;
+	////}
+
+	//static
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -50,8 +58,19 @@ public class AjaxRequest2 extends AppPageBase {
 					String jsonString = AppUtils.getRequestString(requestCycle);
 
 					// {"employeeName": "..."}
-					JSONObject queryJson = new JSONObject(jsonString);
-					String employeeName = queryJson.getString("employeeName");
+
+					//// with Open JSON
+					////JSONObject queryJson = new JSONObject(jsonString);
+					////String employeeName = queryJson.getString("employeeName");
+
+					//// with Jackson: static class
+					////ObjectMapper mapper = new ObjectMapper();
+					////RequestAjaxSearch requestAjaxSearch = mapper.readValue(jsonString, RequestAjaxSearch.class);
+					////String employeeName = requestAjaxSearch.employeeName;
+
+					ObjectMapper mapper = new ObjectMapper();
+					Map<String, String> requestMap = mapper.readValue(jsonString, new TypeReference<Map<String, String>>(){});
+					String employeeName = requestMap.get("employeeName");
 
 					String resultJsonString = "";
 					try (EmployeeDao dao = new EmployeeDao()) {
