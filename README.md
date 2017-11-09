@@ -2,6 +2,18 @@
 
 Apache Wicket 8 Example Application
 
+Apache Wicket を利用した Web アプリケーションのサンプルです。以下の内容を含みます。
+
+    - 認証処理
+
+    - ロールによるアクセス制限のサンプル(アノテーション利用)
+
+    - Ajax のサンプル(Wicket の Ajax 機能利用、素の jQuery ajax 利用)
+
+    - ダウンロード
+
+    - アップロード
+
 - 作成には eclipse Neon.3 Release (4.6.3): http://mergedoc.osdn.jp/ を利用させていただきました。
   ありがたく感謝いたします。どうもありがとうございます。
 
@@ -43,3 +55,8 @@ Apache Wicket 8 Example Application
     - sqlite-jdbc
         https://bitbucket.org/xerial/sqlite-jdbc
 
+    - jQuery
+        https://jquery.com/
+
+    - Bootstrap
+        http://getbootstrap.com/
