@@ -83,7 +83,7 @@ public class Upload1 extends AppPageBase {
 				if (length < uploadContents.length) {
 					contentsString.append(",...");
 				}
-				//contents.set
+
 				contents = contentsString.toString();
 			}
 		}
