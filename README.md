@@ -60,3 +60,7 @@ Apache Wicket を利用した Web アプリケーションのサンプルです�
 
     - Bootstrap
         http://getbootstrap.com/
+
+    - Bootstrap File Input
+        http://plugins.krajee.com/file-input
+
